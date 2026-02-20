@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(cat:*)",
+      "Bash(py:*)",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" status)",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" init)",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" add:*)",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" commit -m \"clean working version\")"
+    ]
+  }
+}

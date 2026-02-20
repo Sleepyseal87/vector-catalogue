@@ -1,0 +1,186 @@
+/* ═══════════════════════════════════════════════════════════════
+   Vitaldecor Catalogue Master Stylesheet
+   All pages: 1080px × 1350px (Instagram portrait / mobile PDF)
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── Color Variables ── */
+:root {
+    --red:          #C41E3A;
+    --plum:         #3D2645;
+    --midnight:     #1F2937;
+    --black:        #1a1a1a;
+    --white:        #FFFFFF;
+    --grey-light:   #F5F5F5;
+    --grey-mid:     #E8E8E8;
+    --grey-dark:    #666666;
+    --stock-green:  #4CAF50;
+
+    --gradient-dark:      linear-gradient(135deg, #1F2937 0%, #1a1a1a 100%);
+    --gradient-dramatic:  linear-gradient(135deg, #C41E3A 0%, #3D2645 50%, #1a1a1a 100%);
+    --gradient-overlay:   linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.72) 100%);
+}
+
+/* ── Base ── */
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #E8E8E8;
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+/* ── Page canvas ── */
+.page {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    position: relative;
+    background: #FFFFFF;
+    flex-shrink: 0;
+    transform-origin: top center;
+}
+
+/* ── Typography classes ── */
+.font-headline {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    color: var(--black);
+}
+
+.font-tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    color: var(--grey-dark);
+}
+
+.font-label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--red);
+}
+
+.font-body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.6;
+}
+
+.font-body-muted {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    color: var(--grey-dark);
+    line-height: 1.7;
+}
+
+.font-spec {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    color: var(--black);
+    font-feature-settings: "tnum", "lnum";
+}
+
+.font-price {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 700;
+    color: var(--red);
+    font-size: 64px;
+}
+
+/* ── Utility classes ── */
+.divider-red {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--red);
+    border: none;
+    flex-shrink: 0;
+}
+
+.divider-grey {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--grey-mid);
+    border: none;
+    flex-shrink: 0;
+}
+
+.label-block {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--red);
+    margin-bottom: 10px;
+}
+
+.dark-zone {
+    background: var(--gradient-dark);
+    color: var(--white);
+}
+
+.print-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: var(--black);
+    color: var(--white);
+    padding: 8px 14px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.print-btn:hover {
+    background: #333;
+}
+
+/* ── Print ── */
+@media print {
+    @page {
+        size: 1080px 1350px;
+        margin: 0;
+    }
+
+    html, body {
+        background: transparent;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        display: block;
+    }
+
+    .page {
+        transform: none !important;
+        box-shadow: none;
+    }
+
+    .print-btn {
+        display: none;
+    }
+}

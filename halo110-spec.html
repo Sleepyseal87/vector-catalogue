@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Halo 110 - Specifications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/spec.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="product-name">HALO 110</div>
+            <div class="product-type">Recessed Downlight - Fixed</div>
+        </div>
+
+        <div class="product-images">
+            <div class="render-container">
+                <div class="product-render">
+                    <img src="assets/halo110-render.jpg" alt="Halo 110 Product Render">
+                </div>
+            </div>
+            <div class="diagram-container">
+                <div class="diagram">
+                    <img src="assets/halo110-diagram.png" alt="Halo 110 Technical Diagram">
+                </div>
+                <span class="vector-mark">VECTOR LIGHTS</span>
+            </div>
+        </div>
+
+        <div class="section-row">
+            <div class="section">
+                <div class="section-title">Performance</div>
+                <div class="performance">CRI &gt;90 | Rf 90 | Rg 100</div>
+            </div>
+            <div class="section">
+                <div class="section-title">Application</div>
+                <div class="section-content">Office, Commercial, General Lighting</div>
+            </div>
+        </div>
+
+        <div class="specs-table">
+            <div class="specs-row specs-header">
+                <div class="specs-cell">Dimensions</div>
+                <div class="specs-cell">Cutout</div>
+                <div class="specs-cell">IP Rating</div>
+            </div>
+            <div class="specs-row">
+                <div class="specs-cell">D124 x H56mm</div>
+                <div class="specs-cell">110mm</div>
+                <div class="specs-cell">20</div>
+            </div>
+            <div class="specs-row specs-header">
+                <div class="specs-cell">Trim Options</div>
+                <div class="specs-cell">Reflector</div>
+                <div class="specs-cell">Beam Angle</div>
+            </div>
+            <div class="specs-row">
+                <div class="specs-cell finish-cell">
+                    <div class="finish-row"><span>White</span><img class="finish-swatch" src="assets/finish-white.jpg" alt="White"></div>
+                </div>
+                <div class="specs-cell finish-cell">
+                    <div class="finish-row"><span>White</span><img class="finish-swatch" src="assets/finish-white.jpg" alt="White"></div>
+                </div>
+                <div class="specs-cell">100°</div>
+            </div>
+            <div class="specs-row specs-header">
+                <div class="specs-cell">Wattage</div>
+                <div class="specs-cell">CCT</div>
+                <div class="specs-cell">Accessories</div>
+            </div>
+            <div class="specs-row">
+                <div class="specs-cell">12W<br>15W</div>
+                <div class="specs-cell">2700K<br>3000K<br>4000K<br>6000K</div>
+                <div class="specs-cell">—</div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-row">
+                <div class="info-label">Dimming &amp; Control</div>
+                <div class="info-value">On-Off, TRIAC, 0-10V, DALI, CASAMBI</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">SKU Order Code</div>
+                <div class="info-value">DLHALO110</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Stock</div>
+                <div class="info-value">Selected configurations available in Bangkok</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="logo"><img src="assets/vitaldecor-logo.jpg" alt="VITALDECOR"></div>
+            <div class="contact-info">
+                <div class="contact-cta">Contact for project pricing</div>
+                <div class="contact-line"><span class="contact-label">LINE:</span> vinvarin</div>
+                <div class="contact-line"><span class="contact-label">Call:</span> 086-556-8888</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function fitPage() {
+            var s = Math.min(document.documentElement.clientWidth / 1080, 1);
+            var c = document.querySelector('.container');
+            c.style.transform = 'scale(' + s + ')';
+            document.body.style.height = (1350 * s) + 'px';
+        }
+        window.addEventListener('resize', fitPage);
+        fitPage();
+    </script>
+</body>
+</html>

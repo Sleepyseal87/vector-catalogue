@@ -1,0 +1,344 @@
+/* Vitaldecor Catalogue Spec Sheet - Shared Stylesheet v3.0 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #E8E8E8;
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1080px;
+    height: 1350px;
+    padding: 44px 50px;
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+    transform-origin: top center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    margin-bottom: 18px;
+}
+
+.product-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 54px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.product-type {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 0;
+}
+
+/* Product images */
+.product-images {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 18px;
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.render-container,
+.diagram-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.diagram-container {
+    position: relative;
+}
+
+.vector-mark {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.product-render {
+    width: 100%;
+    aspect-ratio: 1.2 / 1;
+    background: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.diagram {
+    width: 100%;
+    aspect-ratio: 1.2 / 1;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 4px;
+}
+
+.product-render img,
+.diagram img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    font-size: 0;
+    color: transparent;
+}
+
+/* Section row — Performance + Application side by side */
+.section-row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+}
+
+.section-row .section {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #C41E3A;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-content {
+    font-size: 18px;
+    color: #1a1a1a;
+    line-height: 1.5;
+}
+
+.performance {
+    font-size: 18px;
+    color: #1a1a1a;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Specs table */
+.specs-table {
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 14px;
+}
+
+.specs-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.specs-row:last-child {
+    border-bottom: none;
+}
+
+.specs-header {
+    background: none;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.specs-cell {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #1a1a1a;
+    border-right: 1px solid #E8E8E8;
+    line-height: 1.5;
+}
+
+.specs-cell:last-child {
+    border-right: none;
+}
+
+.specs-header .specs-cell {
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Finish swatches inside Trim / Reflector cells */
+.finish-cell {
+    padding: 8px 12px;
+}
+
+.finish-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.5;
+    min-height: calc(16px * 1.5);
+}
+
+.finish-row span {
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+.finish-swatch {
+    width: 26px;
+    height: 16px;
+    border: 1px solid #C8C8C8;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 2px;
+    display: block;
+}
+
+/* Info section (Dimming / SKU / Stock) */
+.info-section {
+    background: #FFFFFF;
+    padding: 16px 24px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-size: 18px;
+    color: #666666;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.info-value {
+    font-size: 18px;
+    color: #1a1a1a;
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-align: right;
+    line-height: 1.5;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 3px solid;
+    border-image: linear-gradient(90deg, #C41E3A, #8B1F5C, #3D2645) 1;
+    position: relative;
+    margin-top: auto;
+}
+
+.logo img {
+    height: 48px;
+    width: auto;
+}
+
+.contact-info {
+    text-align: right;
+}
+
+.contact-cta {
+    font-size: 18px;
+    color: #8B1F5C;
+    font-weight: 500;
+    margin-bottom: 6px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    text-align: center;
+}
+
+.contact-line {
+    font-size: 18px;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.contact-line:last-child {
+    margin-bottom: 0;
+}
+
+.contact-label {
+    font-weight: 600;
+    color: #8B1F5C;
+}
+
+/* Print / Save as PDF */
+@media print {
+    @page {
+        size: 1080px 1350px;
+        margin: 0;
+    }
+
+    html, body {
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: transparent;
+    }
+
+    body {
+        display: block;
+    }
+
+    .container {
+        transform: none !important;
+        width: 1080px;
+        height: 1350px;
+    }
+}
