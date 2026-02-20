@@ -13,7 +13,9 @@
       "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" config core.autocrlf false)",
       "Bash(git -C:*)",
       "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" branch -M main)",
-      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" push -u origin main)"
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" push -u origin main)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
