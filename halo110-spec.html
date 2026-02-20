@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=1080, initial-scale=0.36, minimum-scale=0.25, maximum-scale=3">
     <title>Halo 110 - Specifications</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,15 +102,5 @@
             </div>
         </div>
     </div>
-    <script>
-        function fitPage() {
-            var s = Math.min(document.documentElement.clientWidth / 1080, 1);
-            var c = document.querySelector('.container');
-            c.style.transform = 'scale(' + s + ')';
-            document.body.style.height = (1350 * s) + 'px';
-        }
-        window.addEventListener('resize', fitPage);
-        fitPage();
-    </script>
 </body>
 </html>
