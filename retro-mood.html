@@ -4,158 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1080, initial-scale=0.36, minimum-scale=0.25, maximum-scale=3">
     <title>Retro — Mood</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/mood.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            margin: 0; padding: 0;
-            background: #030710;
-            font-family: 'IBM Plex Sans', Arial, sans-serif;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        body { display: flex; justify-content: center; }
-
-        .page {
-            width: 1080px;
-            height: 1350px;
-            position: relative;
-            background: linear-gradient(165deg, #04102a 0%, #060a16 45%, #020308 100%);
-            overflow: hidden;
-            transform-origin: top center;
-            flex-shrink: 0;
-        }
-
-        /* ── Square mood photo: 1080 × 1080 ── */
-        .photo-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 1080px;
-            height: 1080px;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            font-size: 0;
-            color: transparent;
-        }
-
-        /* ── Gradient overlay: photo clear at top, fades to dark ── */
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                transparent 22%,
-                rgba(2, 3, 8, 0.18) 42%,
-                rgba(2, 3, 8, 0.78) 62%,
-                rgba(2, 3, 8, 0.97) 76%,
-                rgba(2, 3, 8, 1)    84%
-            );
-            pointer-events: none;
-        }
-
-        /* ── Text content — floats above gradient ── */
-        .content {
-            position: absolute;
-            top: 929px;
-            left: 64px;
-            right: 64px;
-            z-index: 10;
-        }
-
-        .series-label {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: #C41E3A;
-            margin-bottom: 14px;
-        }
-
-        .product-name {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 80px;
-            font-weight: 400;
-            color: #FFFFFF;
-            line-height: 1;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-        }
-
-        .product-type {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 18px;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.40);
-            letter-spacing: 0.5px;
-            margin-bottom: 22px;
-        }
-
-        .intro-paragraph {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.72);
-            line-height: 1.80;
-        }
-
-        /* ── Footer ── */
-        .footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            padding: 0 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 10;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 64px;
-            right: 64px;
-            height: 2px;
-            background: linear-gradient(90deg, #C41E3A 0%, #3D1060 40%, #04102a 100%);
-        }
-
-        .footer-logo img {
-            height: 36px;
-            width: auto;
-            display: block;
-        }
-
-        .footer-mark {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.28);
-        }
+        /* Template A */
+        .page   { position: relative; overflow: hidden; }
+        .footer { position: absolute; bottom: 0; left: 0; right: 0; z-index: 10; }
     </style>
 </head>
 <body>
     <div class="page">
 
-        <!-- Mood photo -->
         <img class="photo-img" src="assets/retro-mood.jpg" alt="">
-
-        <!-- Gradient overlay -->
         <div class="overlay"></div>
 
-        <!-- Text content -->
         <div class="content">
             <div class="series-label">Vector Downlight</div>
             <div class="product-name">RETRO</div>
@@ -163,7 +24,6 @@
             <p class="intro-paragraph">A standard market bulb in a housing with more care than the category usually gets. Curved white reflector, no gaps, no clunky seams. Clean, familiar, and exactly right for apartments and rental properties where simplicity is the whole point.</p>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
             <div class="footer-logo"><img src="assets/vitaldecor-logo.jpg" alt="VITALDECOR"></div>
             <div class="footer-mark">Vector Lights</div>

@@ -4,86 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1080, initial-scale=0.36, minimum-scale=0.25, maximum-scale=3">
     <title>Showcase — Magnetic Track Lighting</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/mood.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            margin: 0; padding: 0;
-            background: #030710;
-            font-family: 'IBM Plex Sans', Arial, sans-serif;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        body { display: flex; justify-content: center; }
-
-        /* ── Canvas ── */
-        .page {
-            width: 1080px;
-            height: 1350px;
-            display: flex;
-            flex-direction: column;
-            background: linear-gradient(165deg, #04102a 0%, #060a16 45%, #020308 100%);
-            transform-origin: top center;
-            flex-shrink: 0;
-        }
-
-        /* ────────────────────────────────────────
-           BLOCK 1: HERO IMAGE — 560px
-        ──────────────────────────────────────── */
-        .hero {
-            height: 560px;
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-            background: #030812;
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            display: block;
-            font-size: 0;
-            color: transparent;
-        }
-
-        /* Placeholder shown when image is missing */
-        .hero-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-placeholder span {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-weight: 300;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.14);
-        }
-
-        /* Bottom fade */
-        .hero-fade {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 180px;
-            background: linear-gradient(to bottom, transparent 0%, rgba(2, 5, 16, 0.92) 100%);
-            pointer-events: none;
-        }
-
-        /* ────────────────────────────────────────
-           BLOCK 2: PRODUCT IMAGE ROW — 340px
-        ──────────────────────────────────────── */
+        /* Template B */
+        .page   { display: flex; flex-direction: column; }
+        .footer { flex-shrink: 0; background: #030710; position: relative; }
+        /* Showcase-specific */
+        .hero     { height: 560px; }
+        .hero-img { object-position: top; }
         .product-row {
             height: 340px;
             flex-shrink: 0;
@@ -92,7 +20,6 @@
             gap: 14px;
             align-items: stretch;
         }
-
         .product-img-wrap {
             flex: 1;
             border-radius: 4px;
@@ -100,7 +27,6 @@
             background: rgba(255, 255, 255, 0.03);
             position: relative;
         }
-
         .product-img-wrap img {
             width: 100%;
             height: 100%;
@@ -110,8 +36,6 @@
             font-size: 0;
             color: transparent;
         }
-
-        /* Placeholder for missing product images */
         .product-img-wrap .img-placeholder {
             position: absolute;
             inset: 0;
@@ -119,146 +43,17 @@
             align-items: center;
             justify-content: center;
         }
-
         .product-img-wrap .img-placeholder span {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-weight: 300;
             font-size: 10px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.10);
         }
-
-        /* ── Gradient divider ── */
-        .divider-red {
-            display: block;
-            height: 2px;
-            border: none;
-            background: linear-gradient(90deg, #C41E3A 0%, #3D1060 40%, #04102a 100%);
-            margin: 0 64px;
-            flex-shrink: 0;
-        }
-
-        /* ────────────────────────────────────────
-           BLOCK 3: CONTENT — flex 1
-        ──────────────────────────────────────── */
-        .content-block {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 36px 64px 32px 64px;
-        }
-
-        .section-label {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: #C41E3A;
-            margin-bottom: 16px;
-        }
-
-        .section-name {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 72px;
-            font-weight: 400;
-            color: #FFFFFF;
-            line-height: 1;
-            letter-spacing: -1px;
-            margin-bottom: 28px;
-        }
-
-        .intro-paragraph {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.70);
-            line-height: 1.80;
-            max-width: 820px;
-        }
-
-        /* Inquiry callout — pushed to bottom */
-        .inquiry-callout {
-            margin-top: auto;
-            display: flex;
-            align-items: baseline;
-            gap: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .inquiry-label {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.28);
-            flex-shrink: 0;
-        }
-
-        .inquiry-text {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.38);
-            line-height: 1.6;
-        }
-
-        /* ────────────────────────────────────────
-           FOOTER — 60px
-        ──────────────────────────────────────── */
-        .footer {
-            height: 70px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 64px;
-            background: #030710;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 64px;
-            right: 64px;
-            height: 2px;
-            background: linear-gradient(90deg, #C41E3A 0%, #3D1060 40%, #04102a 100%);
-        }
-
-        .footer-logo img {
-            height: 36px;
-            width: auto;
-            display: block;
-        }
-
-        .footer-mark {
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.28);
-        }
-
-        html, body { overflow-x: hidden; max-width: 100vw; }
-
-        @media print {
-            @page { size: 1080px 1350px; margin: 0; }
-            html, body { width: 1080px; height: 1350px; overflow: hidden; background: transparent; display: block; max-width: none; }
-            .page { transform: none !important; }
-        }
     </style>
 </head>
 <body>
-
     <div class="page">
 
-        <!-- BLOCK 1: HERO IMAGE -->
         <div class="hero" id="hero-zone">
             <img class="hero-img"
                  src="assets/showcase-mood.jpg"
@@ -270,7 +65,6 @@
             <div class="hero-fade"></div>
         </div>
 
-        <!-- BLOCK 2: PRODUCT IMAGE ROW -->
         <div class="product-row">
             <div class="product-img-wrap">
                 <img src="assets/showcase-product-01.jpg" alt=""
@@ -289,37 +83,24 @@
             </div>
         </div>
 
-        <!-- Divider -->
         <hr class="divider-red">
 
-        <!-- BLOCK 3: CONTENT -->
         <div class="content-block">
-
             <div class="section-name">SHOWCASE LIGHTS</div>
-
             <p class="intro-paragraph">The fixture disappears. The product doesn't. Mini magnetic track lighting for retail display, jewellery cases and precision accent work — compact heads, clean lines, beam control tight enough for a ring on a velvet cushion. Used in some of the most demanding retail environments in Bangkok. Available in select configurations; speak to us about your display requirements.</p>
-
-            <!-- Inquiry callout -->
             <div class="inquiry-callout">
                 <span class="inquiry-label">Enquire</span>
                 <span class="inquiry-text">Showcase lighting is configured per display environment. Contact us with your case dimensions and target CCT — we'll recommend the right heads, track lengths and driver arrangement.</span>
             </div>
-
         </div>
 
-        <!-- Divider -->
         <hr class="divider-red">
 
-        <!-- FOOTER -->
         <div class="footer">
-            <div class="footer-logo">
-                <img src="assets/vitaldecor-logo.jpg" alt="VITALDECOR">
-            </div>
+            <div class="footer-logo"><img src="assets/vitaldecor-logo.jpg" alt="VITALDECOR"></div>
             <div class="footer-mark">Vector Lights</div>
         </div>
 
     </div>
-
-
 </body>
 </html>

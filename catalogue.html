@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vitaldecor — Vector Catalogue</title>
   <script src="catalogue-manifest.js"></script>
-  <link rel="stylesheet" href="catalogue-styles.css">
+  <!-- Google Fonts loaded once globally — applies inside shadow roots too -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
   <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -21,12 +24,14 @@
     align-items: center;
   }
 
+  /* Host element handles canvas size, scaling, clipping */
   .catalogue-page {
     width: 1080px;
     height: 1350px;
     overflow: hidden;
     transform-origin: top center;
     flex-shrink: 0;
+    display: block;
   }
 
   #pdf-btn {
@@ -62,7 +67,7 @@
     #pdf-btn { display: none; }
     #loading { display: none; }
   }
-</style>
+  </style>
 </head>
 <body>
 
@@ -87,23 +92,33 @@
 
           const html = await response.text();
 
-          // 1. Extract all <style> blocks
-          const styleMatches = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)];
-          const styles = styleMatches.map(m => `<style>${m[1]}</style>`).join('\n');
+          // Parse properly — handles nested divs, no regex truncation
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
 
-          // 2. Extract inner content of <div class="page">
-          const pageMatch = html.match(/<div class="page"[^>]*>([\s\S]*?)<\/div>\s*(?:<script|<\/body>)/i) ||
-                            html.match(/<div class="page"[^>]*>([\s\S]*?)<\/div>/i);
-          if (!pageMatch) {
+          // Collect <style> blocks
+          const styleTags = [...doc.querySelectorAll('style')]
+            .map(el => el.outerHTML)
+            .join('\n');
+
+          // Collect <link> stylesheets — skip only Google Fonts (loaded globally)
+          const linkTags = [...doc.querySelectorAll('link[rel="stylesheet"]')]
+            .filter(el => !el.getAttribute('href').includes('fonts.googleapis.com'))
+            .map(el => el.outerHTML)
+            .join('\n');
+
+          // Extract the full .page element (outerHTML preserves class for CSS targeting)
+          const pageEl = doc.querySelector('.page');
+          if (!pageEl) {
             console.warn(`No .page div found in ${filename}`);
             continue;
           }
-          const pageContent = pageMatch[1];
 
-          // 3. Inject styles + content into .catalogue-page (no duplicate link, no scripts)
+          // Shadow DOM isolates each page's CSS — no cross-page style bleed
           const pageDiv = document.createElement('div');
           pageDiv.className = 'catalogue-page';
-          pageDiv.innerHTML = styles + '\n' + pageContent;
+          const shadow = pageDiv.attachShadow({ mode: 'open' });
+          shadow.innerHTML = linkTags + '\n' + styleTags + '\n' + pageEl.outerHTML;
 
           container.appendChild(pageDiv);
         } catch (err) {
@@ -116,25 +131,26 @@
 
     document.addEventListener('DOMContentLoaded', loadCatalogue);
   </script>
-<script>
-  function scalePages() {
-    const pages = document.querySelectorAll('.catalogue-page');
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const scaleW = vw / 1080;
-    const scaleH = vh / 1350;
-    const scale = vw <= 1080 ? scaleW : scaleH;
-    const marginBottom = (scale - 1) * 1350;
-    pages.forEach(p => {
-      p.style.transform = `scale(${scale})`;
-      p.style.marginBottom = marginBottom + 'px';
+
+  <script>
+    function scalePages() {
+      const pages = document.querySelectorAll('.catalogue-page');
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const scaleW = vw / 1080;
+      const scaleH = vh / 1350;
+      const scale = vw <= 1080 ? scaleW : scaleH;
+      const marginBottom = (scale - 1) * 1350;
+      pages.forEach(p => {
+        p.style.transform = `scale(${scale})`;
+        p.style.marginBottom = marginBottom + 'px';
+      });
+    }
+    window.addEventListener('resize', scalePages);
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(scalePages, 500);
     });
-  }
-  window.addEventListener('resize', scalePages);
-  document.addEventListener('DOMContentLoaded', () => {
-    // Run after pages finish loading
-    setTimeout(scalePages, 500);
-  });
-</script>
+  </script>
+
 </body>
 </html>
