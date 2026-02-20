@@ -7,107 +7,62 @@
   <script src="catalogue-manifest.js"></script>
   <link rel="stylesheet" href="catalogue-styles.css">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      background: #1a1a1a;
-      font-family: sans-serif;
-    }
+  body {
+    background: #1a1a1a;
+    font-family: sans-serif;
+    overflow-x: hidden;
+  }
 
-    #catalogue-container {
-      width: 1080px;
-      margin: 0 auto;
-    }
+  #catalogue-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .page {
-      width: 1080px;
-      height: 1350px;
-      overflow: hidden;
-      transform-origin: top left;
-    }
+  .page {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    transform-origin: top center;
+    flex-shrink: 0;
+  }
 
-    /* Mobile: scale to fit screen width */
-    @media (max-width: 1080px) {
-      #catalogue-container {
-        width: 100vw;
-        padding: 0;
-      }
-      .page {
-        transform: scale(calc(100vw / 1080));
-        margin-bottom: calc((100vw / 1080 - 1) * 1350px);
-      }
-    }
+  #pdf-btn {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #444;
+    padding: 10px 18px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    z-index: 9999;
+    text-transform: uppercase;
+  }
 
-    /* Desktop: scale to fit screen height */
-    @media (min-width: 1081px) {
-      #catalogue-container {
-        padding: 0;
-      }
-      .page {
-        transform: scale(calc(100vh / 1350));
-        transform-origin: top center;
-        margin-bottom: calc((100vh / 1350 - 1) * 1350px);
-      }
-    }
+  #pdf-btn:hover { background: #333; }
 
-    #pdf-btn {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      background: #1a1a1a;
-      color: #ffffff;
-      border: 1px solid #444;
-      padding: 10px 18px;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      z-index: 9999;
-      text-transform: uppercase;
-    }
+  #loading {
+    color: #666;
+    text-align: center;
+    padding: 80px 0;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
 
-    #pdf-btn:hover {
-      background: #333;
-    }
-
-    #loading {
-      color: #666;
-      text-align: center;
-      padding: 80px 0;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    @media print {
-      body {
-        margin: 0;
-        padding: 0;
-        background: none;
-      }
-
-      #catalogue-container {
-        padding: 0;
-        background: none;
-      }
-
-      .page {
-        break-after: page;
-        page-break-after: always;
-      }
-
-      #pdf-btn {
-        display: none;
-      }
-
-      #loading {
-        display: none;
-      }
-    }
-  </style>
+  @media print {
+    body { margin: 0; padding: 0; background: none; }
+    #catalogue-container { padding: 0; background: none; }
+    .page { break-after: page; page-break-after: always; transform: none !important; margin-bottom: 0 !important; }
+    #pdf-btn { display: none; }
+    #loading { display: none; }
+  }
+</style>
 </head>
 <body>
 
@@ -162,6 +117,25 @@
 
     document.addEventListener('DOMContentLoaded', loadCatalogue);
   </script>
-
+<script>
+  function scalePages() {
+    const pages = document.querySelectorAll('.page');
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const scaleW = vw / 1080;
+    const scaleH = vh / 1350;
+    const scale = vw <= 1080 ? scaleW : scaleH;
+    const marginBottom = (scale - 1) * 1350;
+    pages.forEach(p => {
+      p.style.transform = `scale(${scale})`;
+      p.style.marginBottom = marginBottom + 'px';
+    });
+  }
+  window.addEventListener('resize', scalePages);
+  document.addEventListener('DOMContentLoaded', () => {
+    // Run after pages finish loading
+    setTimeout(scalePages, 500);
+  });
+</script>
 </body>
 </html>
