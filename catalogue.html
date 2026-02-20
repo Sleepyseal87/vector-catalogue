@@ -102,7 +102,7 @@
 
       for (const filename of pages) {
         try {
-          const response = await fetch(filename);
+          const response = await fetch(filename + '.html');
           if (!response.ok) {
             console.warn(`Failed to load ${filename}: ${response.status}`);
             continue;
