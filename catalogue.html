@@ -21,15 +21,37 @@
     #catalogue-container {
       width: 1080px;
       margin: 0 auto;
-      padding: 40px 0;
     }
 
     .page {
       width: 1080px;
       height: 1350px;
       overflow: hidden;
-      display: block;
-      position: relative;
+      transform-origin: top left;
+    }
+
+    /* Mobile: scale to fit screen width */
+    @media (max-width: 1080px) {
+      #catalogue-container {
+        width: 100vw;
+        padding: 0;
+      }
+      .page {
+        transform: scale(calc(100vw / 1080));
+        margin-bottom: calc((100vw / 1080 - 1) * 1350px);
+      }
+    }
+
+    /* Desktop: scale to fit screen height */
+    @media (min-width: 1081px) {
+      #catalogue-container {
+        padding: 0;
+      }
+      .page {
+        transform: scale(calc(100vh / 1350));
+        transform-origin: top center;
+        margin-bottom: calc((100vh / 1350 - 1) * 1350px);
+      }
     }
 
     #pdf-btn {
