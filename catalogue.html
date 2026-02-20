@@ -21,7 +21,7 @@
     align-items: center;
   }
 
-  .page {
+  .catalogue-page {
     width: 1080px;
     height: 1350px;
     overflow: hidden;
@@ -58,7 +58,7 @@
   @media print {
     body { margin: 0; padding: 0; background: none; }
     #catalogue-container { padding: 0; background: none; }
-    .page { break-after: page; page-break-after: always; transform: none !important; margin-bottom: 0 !important; }
+    .catalogue-page { break-after: page; page-break-after: always; transform: none !important; margin-bottom: 0 !important; }
     #pdf-btn { display: none; }
     #loading { display: none; }
   }
@@ -103,7 +103,7 @@
           );
 
           const pageDiv = document.createElement('div');
-          pageDiv.className = 'page';
+          pageDiv.className = 'catalogue-page';
           pageDiv.innerHTML = bodyContent;
 
           container.appendChild(pageDiv);
@@ -119,7 +119,7 @@
   </script>
 <script>
   function scalePages() {
-    const pages = document.querySelectorAll('.page');
+    const pages = document.querySelectorAll('.catalogue-page');
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const scaleW = vw / 1080;
