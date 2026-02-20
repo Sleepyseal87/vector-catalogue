@@ -94,7 +94,11 @@
             continue;
           }
 
-          let bodyContent = bodyMatch[1];
+          // Extract just the inner content of the .page div, not the .page div itself
+          const pageMatch = html.match(/<div class="page"[^>]*>([\s\S]*?)<\/div>\s*<\/body>/i) ||
+                            html.match(/<div class="page"[^>]*>([\s\S]*)<\/div>/i);
+          const bodyContent_raw = bodyMatch[1];
+          let bodyContent = pageMatch ? pageMatch[1] : bodyContent_raw;
 
           // Strip any <link> tags referencing catalogue-styles.css
           bodyContent = bodyContent.replace(
