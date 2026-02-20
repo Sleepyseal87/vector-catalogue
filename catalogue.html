@@ -87,28 +87,23 @@
 
           const html = await response.text();
 
-          // Extract body innerHTML
-          const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-          if (!bodyMatch) {
-            console.warn(`No <body> found in ${filename}`);
+          // 1. Extract all <style> blocks
+          const styleMatches = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)];
+          const styles = styleMatches.map(m => `<style>${m[1]}</style>`).join('\n');
+
+          // 2. Extract inner content of <div class="page">
+          const pageMatch = html.match(/<div class="page"[^>]*>([\s\S]*?)<\/div>\s*(?:<script|<\/body>)/i) ||
+                            html.match(/<div class="page"[^>]*>([\s\S]*?)<\/div>/i);
+          if (!pageMatch) {
+            console.warn(`No .page div found in ${filename}`);
             continue;
           }
+          const pageContent = pageMatch[1];
 
-          // Extract just the inner content of the .page div, not the .page div itself
-          const pageMatch = html.match(/<div class="page"[^>]*>([\s\S]*?)<\/div>\s*<\/body>/i) ||
-                            html.match(/<div class="page"[^>]*>([\s\S]*)<\/div>/i);
-          const bodyContent_raw = bodyMatch[1];
-          let bodyContent = pageMatch ? pageMatch[1] : bodyContent_raw;
-
-          // Strip any <link> tags referencing catalogue-styles.css
-          bodyContent = bodyContent.replace(
-            /<link[^>]*catalogue-styles\.css[^>]*>/gi,
-            ''
-          );
-
+          // 3. Inject styles + content into .catalogue-page (no duplicate link, no scripts)
           const pageDiv = document.createElement('div');
           pageDiv.className = 'catalogue-page';
-          pageDiv.innerHTML = bodyContent;
+          pageDiv.innerHTML = styles + '\n' + pageContent;
 
           container.appendChild(pageDiv);
         } catch (err) {
