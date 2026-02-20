@@ -19,9 +19,11 @@
   }
 
   #catalogue-container {
+    width: 100%;           /* full viewport width so align-items:center is vs viewport */
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;    /* clip 1080px children on narrow screens */
   }
 
   /* Host element handles canvas size, scaling, clipping */
@@ -49,7 +51,8 @@
     text-transform: uppercase;
   }
 
-  #pdf-btn:hover { background: #333; }
+  #pdf-btn:hover    { background: #333; }
+  #pdf-btn:disabled { opacity: 0.4; cursor: default; }
 
   #loading {
     color: #666;
@@ -61,9 +64,10 @@
   }
 
   @media print {
-    body { margin: 0; padding: 0; background: none; }
-    #catalogue-container { padding: 0; background: none; }
-    .catalogue-page { break-after: page; page-break-after: always; transform: none !important; margin-bottom: 0 !important; }
+    @page { size: 1080px 1350px; margin: 0; }
+    body { margin: 0; padding: 0; background: none; width: 1080px; }
+    #catalogue-container { display: block; width: 1080px; background: none; overflow: visible; }
+    .catalogue-page { break-after: page; page-break-after: always; transform: none !important; margin-bottom: 0 !important; width: 1080px !important; height: 1350px !important; overflow: hidden !important; }
     #pdf-btn { display: none; }
     #loading { display: none; }
   }
@@ -71,85 +75,72 @@
 </head>
 <body>
 
-  <button id="pdf-btn" onclick="window.print()">Save as PDF</button>
+  <button id="pdf-btn" onclick="window.print()" disabled>Save as PDF</button>
 
   <div id="catalogue-container">
     <div id="loading">Loading catalogue&hellip;</div>
   </div>
 
   <script>
-    async function loadCatalogue() {
-      const container = document.getElementById('catalogue-container');
-      const loading = document.getElementById('loading');
-
-      for (const filename of pages) {
-        try {
-          const response = await fetch(filename + '.html');
-          if (!response.ok) {
-            console.warn(`Failed to load ${filename}: ${response.status}`);
-            continue;
-          }
-
-          const html = await response.text();
-
-          // Parse properly — handles nested divs, no regex truncation
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, 'text/html');
-
-          // Collect <style> blocks
-          const styleTags = [...doc.querySelectorAll('style')]
-            .map(el => el.outerHTML)
-            .join('\n');
-
-          // Collect <link> stylesheets — skip only Google Fonts (loaded globally)
-          const linkTags = [...doc.querySelectorAll('link[rel="stylesheet"]')]
-            .filter(el => !el.getAttribute('href').includes('fonts.googleapis.com'))
-            .map(el => el.outerHTML)
-            .join('\n');
-
-          // Extract the full .page element (outerHTML preserves class for CSS targeting)
-          const pageEl = doc.querySelector('.page');
-          if (!pageEl) {
-            console.warn(`No .page div found in ${filename}`);
-            continue;
-          }
-
-          // Shadow DOM isolates each page's CSS — no cross-page style bleed
-          const pageDiv = document.createElement('div');
-          pageDiv.className = 'catalogue-page';
-          const shadow = pageDiv.attachShadow({ mode: 'open' });
-          shadow.innerHTML = linkTags + '\n' + styleTags + '\n' + pageEl.outerHTML;
-
-          container.appendChild(pageDiv);
-        } catch (err) {
-          console.warn(`Error loading ${filename}:`, err);
-        }
-      }
-
-      loading.remove();
-    }
-
-    document.addEventListener('DOMContentLoaded', loadCatalogue);
-  </script>
-
-  <script>
     function scalePages() {
-      const pages = document.querySelectorAll('.catalogue-page');
+      const els = document.querySelectorAll('.catalogue-page');
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      const scaleW = vw / 1080;
-      const scaleH = vh / 1350;
-      const scale = vw <= 1080 ? scaleW : scaleH;
+      const scale = vw <= 1080 ? vw / 1080 : vh / 1350;
       const marginBottom = (scale - 1) * 1350;
-      pages.forEach(p => {
+      els.forEach(p => {
         p.style.transform = `scale(${scale})`;
         p.style.marginBottom = marginBottom + 'px';
       });
     }
     window.addEventListener('resize', scalePages);
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(scalePages, 500);
-    });
+
+    async function loadCatalogue() {
+      const container = document.getElementById('catalogue-container');
+      const loading   = document.getElementById('loading');
+      const pdfBtn    = document.getElementById('pdf-btn');
+
+      // Fetch all pages in parallel — much faster than sequential
+      const htmlList = await Promise.all(
+        pages.map(filename =>
+          fetch(filename + '.html')
+            .then(r => r.ok ? r.text() : null)
+            .catch(() => null)
+        )
+      );
+
+      const parser = new DOMParser();
+
+      for (let i = 0; i < pages.length; i++) {
+        const html = htmlList[i];
+        if (!html) { console.warn(`Failed to load ${pages[i]}`); continue; }
+
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const styleTags = [...doc.querySelectorAll('style')]
+          .map(el => el.outerHTML).join('\n');
+
+        const linkTags = [...doc.querySelectorAll('link[rel="stylesheet"]')]
+          .filter(el => !el.getAttribute('href').includes('fonts.googleapis.com'))
+          .map(el => el.outerHTML).join('\n');
+
+        const pageEl = doc.querySelector('.page');
+        if (!pageEl) { console.warn(`No .page in ${pages[i]}`); continue; }
+
+        const pageDiv = document.createElement('div');
+        pageDiv.className = 'catalogue-page';
+        const shadow = pageDiv.attachShadow({ mode: 'open' });
+        shadow.innerHTML = linkTags + '\n' + styleTags + '\n' + pageEl.outerHTML;
+
+        container.appendChild(pageDiv);
+      }
+
+      loading.remove();
+      scalePages();          // scale after ALL pages are in the DOM
+      pdfBtn.disabled = false;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCatalogue);
   </script>
 
 </body>
