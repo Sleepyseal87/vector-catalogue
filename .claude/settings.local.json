@@ -9,7 +9,11 @@
       "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" status)",
       "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" init)",
       "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" add:*)",
-      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" commit -m \"clean working version\")"
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" commit -m \"clean working version\")",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" config core.autocrlf false)",
+      "Bash(git -C:*)",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" branch -M main)",
+      "Bash(git -C \"c:/Users/Vin/My Drive \\(varin@vitaldecor.co.th\\)/VITAL DECOR/MEDIA/vector-catalogue\" push -u origin main)"
     ]
   }
 }
