@@ -8,6 +8,7 @@ const pages = [
   'sable-vanity-spec',
   'starling-mood',
   'starling25-spec',
+  'starlingr45-spec',
   'halo-mood',
   'halo110-spec',
   'retro-mood',

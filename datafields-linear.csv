@@ -1,5 +1,6 @@
-﻿Product Model,Product Subtitle,Product Render,Technical Diagram,Dimensions,Mounting,Wattage,Lumen Output,Beam Angles,CCT Options,CRI,IP,Dimming & Control
-iA8-2835-4.3W,Striplight,Striplight.jpg,4.3w-diagram.png,8mm,In Profile,4.3w/m,418lm @ 3000K,120°,2700K/3000K/4000/6000K,90,20\,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
-iA8-2835-9.6W,Striplight,Striplight.jpg,9.6w-diagram.png,8mm,In Profile,9.6w/m,750lm @ 3000K,120°,2700K/3000K/4000/6000K,90,20\,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
-iA8-2835-14.4W,Striplight,Striplight.jpg,14.4w-diagram.png,8mm,In Profile,14.4w/m,1260lm @ 3000K,120°,2700K/3000K/4000/6000K,90,20\,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
-iA8-2835-18W,Striplight,Striplight.jpg,18w-diagram.png,8mm,In Profile,18w/m,1695lm @ 3000K,120°,2700K/3000K/4000/6000K,90,20\,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
+﻿Product Model,Product Subtitle,Product Render,Technical Diagram,Dimensions,Mounting,Wattage,Lumen Output,Beam Angles,CCT Options,CRI,IP,Voltage,Dimming & Control
+IAM8-036-168B,Striplight,Striplight.jpg,3.6w-diagram.png,8mm,In Profile,3.6w/m,513lm @ 3000K,120°,2700K/3000K/3500K/4000K/6500K,90,20,DC24V,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
+IAM8-072-168B,Striplight,Striplight.jpg,7.2w-diagram.png,8mm,In Profile,7.2w/m,1017lm @ 3000K,120°,2700K/3000K/3500K/4000K/6500K,90,20,DC24V,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
+IAM8-105-168B,Striplight,Striplight.jpg,10.5w-diagram.png,8mm,In Profile,10.5w/m,1440lm @ 3000K,120°,2700K/3000K/3500K/4000K/6500K,90,20,DC24V,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
+IA10-144-160B,Striplight,Striplight.jpg,14.4w-diagram.png,10mm,In Profile,14.4w/m,2189lm @ 3000K,120°,2700K/3000K/3500K/4000K/6500K,90,20,DC24V,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
+IA10-216-240B,Striplight,Striplight.jpg,21.6w-diagram.png,10mm,In Profile,21.6w/m,3283lm @ 3000K,120°,2700K/3000K/3500K/4000K/6500K,90,20,DC24V,"On-Off, TRIAC, 0-10V, DALI, CASAMBI, DMX"
